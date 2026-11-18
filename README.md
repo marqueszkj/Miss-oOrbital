@@ -1,4 +1,4 @@
-# Projeto 1 - Arena Tech: Planejador de Maratona Gamer
+# Projeto 2 - Missão Orbital: Simulador de Treinamento Espacial
 
 **Disciplina:** Algoritmos e Pensamento Computacional
 **Professor:** Vinicius Alves
@@ -8,60 +8,66 @@
 
 | Nome | RGM |
 |------|-----|
-| Gabriel Maciel | 4728638 |
-| Pedro Henrique Gelli Soares | 049385992 |
 | Laura Marques Ribeiro | 47228377 |
+| Pedro Henrique Gelli Soares | 049385992 |
+| Gabril Macio Emidio | 47280638 |
 
 ## Sobre a solução
 
-O programa foi desenvolvido em linguagem C e tem como objetivo auxiliar na organização da Arena Tech, uma maratona gamer no campus. Ele solicita ao usuário, via teclado, oito informações sobre o evento:
+O programa foi desenvolvido em linguagem C e simula o treinamento de cadetes espaciais na Missão Orbital. Para cada cadete avaliado, o usuário informa o código do cadete e a pontuação obtida em 3 etapas do treinamento. Ao final, o programa exibe um relatório com a pontuação total, a média e a classificação do cadete.
 
-1. Quantidade de participantes
-2. Jogadores por time
-3. Quantidade de computadores
-4. Potência média de cada computador
-5. Duração do evento
-6. Preço do kWh de energia
-7. Preço do kit de alimentação
-8. Outros custos
+### Como funciona
 
-A partir desses dados, o programa calcula a quantidade de times necessários, arredondando o resultado para cima com a função `ceil()` da biblioteca `math.h`, já que um time incompleto ainda conta como um time. Também são calculados:
+1. O usuário digita o **código do cadete**.
+2. O programa pede a **pontuação de cada uma das 3 etapas** (valores de 0 a 100).
+3. Se a pontuação for inválida (menor que 0 ou maior que 100), o programa pede o valor novamente até que seja válido.
+4. São calculados o **total de pontos** e a **média** (`total / 3.0`).
+5. O cadete recebe uma classificação conforme a média.
+6. O usuário escolhe se deseja avaliar outro cadete (`1` para sim, `0` para não).
 
-- O consumo estimado de energia (kWh)
-- O custo da energia
-- O custo da alimentação (um kit por participante)
-- O custo total do evento
-- O custo médio por participante
+### Classificação
+
+| Média | Classificação | Mensagem |
+|-------|---------------|----------|
+| 85 ou mais | COMANDANTE DA MISSÃO | Treinamento concluído com excelência |
+| 70 a 84,99 | PILOTO APROVADO | Cadete autorizado para a missão |
+| 50 a 69,99 | CADETE EM RECUPERAÇÃO | Novo treinamento recomendado |
+| Menos de 50 | TREINAMENTO REINICIADO | Cadete ainda não autorizado |
+
+Se o cadete obtiver o total de **300 pontos** (100 em todas as etapas), o programa também exibe a mensagem **PONTUAÇÃO MÁXIMA!**.
 
 ### Recursos utilizados
 
-- Variáveis dos tipos `int` (valores inteiros, como participantes e computadores) e `float` (valores decimais, como preços e potência)
-- `scanf()` para entrada de dados
-- `printf()` para exibir o relatório final formatado com duas casas decimais
-- Biblioteca `math.h` (função `ceil()`)
-
-Não foram usadas estruturas condicionais ou de repetição, conforme solicitado pelo projeto.
-
-## Teste realizado
-
-O programa foi testado com os dados do teste mínimo obrigatório:
-
-| Entrada | Valor |
-|---------|-------|
-| Participantes | 25 |
-| Jogadores por time | 3 |
-| Computadores | 20 |
-| Potência média | 600 W |
-| Duração | 2 horas |
-| Preço do kWh | R$ 1,00 |
-| Kit de alimentação | R$ 25,00 |
-| Outros custos | R$ 200,00 |
-
-O resultado obtido (**CUSTO TOTAL: R$ 849,00**) bateu corretamente com o exemplo apresentado no PDF do professor.
+- Variáveis dos tipos `int` (código, etapa, pontos, total e controle do laço) e `float` (média)
+- `scanf()` para entrada de dados e `printf()` para exibir o relatório com a média em duas casas decimais
+- Estrutura de repetição `for` para percorrer as 3 etapas
+- Estrutura de repetição `while` para validar a pontuação digitada
+- Estrutura de repetição `do...while` para avaliar vários cadetes na mesma execução
+- Estruturas condicionais `if`, `else if` e `else` para definir a classificação
 
 ## Como compilar e executar
 
 ```bash
-gcc projeto1_arena_tech.c -o projeto1_arena_tech -lm
-./projeto1_arena_tech
+gcc projeto2_missao_orbital.c -o projeto2_missao_orbital
+./projeto2_missao_orbital
+```
+
+## Exemplo de execução
+
+```
+===== MISSAO ORBITAL =====
+Codigo do cadete: 101
+Pontuacao da etapa 1: 90
+Pontuacao da etapa 2: 80
+Pontuacao da etapa 3: 85
+
+---------- RESULTADO ----------
+Cadete: 101
+Pontuacao total: 255 pontos
+Media: 85.00
+Classificacao: COMANDANTE DA MISSAO
+Treinamento concluido com excelencia.
+-------------------------------
+Avaliar outro cadete? 1-Sim | 0-Nao: 0
+Sistema encerrado.
 ```
